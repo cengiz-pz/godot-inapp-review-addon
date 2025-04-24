@@ -3,11 +3,9 @@
 #
 
 @tool
-class_name InappReview
-extends Node
+class_name InappReview extends Node
 
 const PLUGIN_SINGLETON_NAME: String = "@pluginName@"
-const PLUGIN_TARGET_OS: String = "@targetOs@"
 
 signal review_info_generated()
 signal review_info_generation_failed()
@@ -35,10 +33,8 @@ func _update_plugin() -> void:
 	if _plugin_singleton == null:
 		if Engine.has_singleton(PLUGIN_SINGLETON_NAME):
 			_plugin_singleton = Engine.get_singleton(PLUGIN_SINGLETON_NAME)
-		elif OS.has_feature(PLUGIN_TARGET_OS):
+		elif not OS.has_feature("editor"):
 			printerr("%s singleton not found!" % PLUGIN_SINGLETON_NAME)
-		else:
-			printerr("%s should be run on %s!" % [PLUGIN_SINGLETON_NAME, PLUGIN_TARGET_OS])
 
 
 func _connect_signals() -> void:
