@@ -33,6 +33,7 @@ func _update_plugin() -> void:
 	if _plugin_singleton == null:
 		if Engine.has_singleton(PLUGIN_SINGLETON_NAME):
 			_plugin_singleton = Engine.get_singleton(PLUGIN_SINGLETON_NAME)
+			_connect_signals()
 		elif not OS.has_feature("editor"):
 			printerr("%s singleton not found!" % PLUGIN_SINGLETON_NAME)
 
